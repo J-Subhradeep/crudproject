@@ -52,8 +52,10 @@ def edit(request, id):
         data = str(dict(request.POST)).replace(
             '[', '').replace(']', '').replace("'", '"')
         data = json.loads(data)
-        reg = TodoList(id=id, todo=data.get('todo'),
-                       time=data.get('time').replace('T', ' '))
-        reg.save()
+        print(data.get('submit'))
+        if data.get('submit'):
+            reg = TodoList(id=id, todo=data.get('todo'),
+                           time=data.get('time').replace('T', ' '))
+            reg.save()
         return redirect(home)
     return render(request, "enroll/html/edit.html", {'id': id, 'todo': person.get('todo'), 'time': person.get('time').replace(' ', 'T')})
